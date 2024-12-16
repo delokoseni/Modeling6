@@ -161,7 +161,7 @@ namespace Modeling6
             {
                 Title = title,
                 StrokeThickness = 2,
-                MarkerType = MarkerType.Circle
+                MarkerType = MarkerType.None
             };
 
             foreach (var point in points)
