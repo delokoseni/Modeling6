@@ -64,6 +64,13 @@
             labelS330 = new Label();
             labelS440 = new Label();
             labelS550 = new Label();
+            labelTime = new Label();
+            labelStep = new Label();
+            textBoxTime = new TextBox();
+            textBoxStep = new TextBox();
+            richTextBox = new RichTextBox();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            button = new Button();
             tableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -182,7 +189,7 @@
             label_12.AutoSize = true;
             label_12.Location = new Point(137, 58);
             label_12.Name = "label_12";
-            label_12.Size = new Size(50, 20);
+            label_12.Size = new Size(0, 20);
             label_12.TabIndex = 6;
             // 
             // label_13
@@ -190,7 +197,7 @@
             label_13.AutoSize = true;
             label_13.Location = new Point(196, 58);
             label_13.Name = "label_13";
-            label_13.Size = new Size(50, 20);
+            label_13.Size = new Size(0, 20);
             label_13.TabIndex = 7;
             // 
             // label_14
@@ -198,7 +205,7 @@
             label_14.AutoSize = true;
             label_14.Location = new Point(255, 58);
             label_14.Name = "label_14";
-            label_14.Size = new Size(50, 40);
+            label_14.Size = new Size(0, 20);
             label_14.TabIndex = 8;
             // 
             // label_15
@@ -214,7 +221,7 @@
             label_21.AutoSize = true;
             label_21.Location = new Point(78, 103);
             label_21.Name = "label_21";
-            label_21.Size = new Size(50, 40);
+            label_21.Size = new Size(0, 20);
             label_21.TabIndex = 11;
             // 
             // label_22
@@ -222,7 +229,7 @@
             label_22.AutoSize = true;
             label_22.Location = new Point(137, 103);
             label_22.Name = "label_22";
-            label_22.Size = new Size(50, 40);
+            label_22.Size = new Size(0, 20);
             label_22.TabIndex = 12;
             // 
             // label_23
@@ -230,7 +237,7 @@
             label_23.AutoSize = true;
             label_23.Location = new Point(196, 103);
             label_23.Name = "label_23";
-            label_23.Size = new Size(50, 40);
+            label_23.Size = new Size(0, 20);
             label_23.TabIndex = 13;
             // 
             // label_24
@@ -238,7 +245,7 @@
             label_24.AutoSize = true;
             label_24.Location = new Point(255, 103);
             label_24.Name = "label_24";
-            label_24.Size = new Size(50, 40);
+            label_24.Size = new Size(0, 20);
             label_24.TabIndex = 14;
             // 
             // label_25
@@ -246,7 +253,7 @@
             label_25.AutoSize = true;
             label_25.Location = new Point(314, 103);
             label_25.Name = "label_25";
-            label_25.Size = new Size(50, 40);
+            label_25.Size = new Size(0, 20);
             label_25.TabIndex = 15;
             // 
             // label_31
@@ -254,7 +261,7 @@
             label_31.AutoSize = true;
             label_31.Location = new Point(78, 148);
             label_31.Name = "label_31";
-            label_31.Size = new Size(50, 40);
+            label_31.Size = new Size(0, 20);
             label_31.TabIndex = 17;
             // 
             // label_32
@@ -262,7 +269,7 @@
             label_32.AutoSize = true;
             label_32.Location = new Point(137, 148);
             label_32.Name = "label_32";
-            label_32.Size = new Size(50, 40);
+            label_32.Size = new Size(0, 20);
             label_32.TabIndex = 18;
             // 
             // label_33
@@ -270,7 +277,7 @@
             label_33.AutoSize = true;
             label_33.Location = new Point(196, 148);
             label_33.Name = "label_33";
-            label_33.Size = new Size(50, 40);
+            label_33.Size = new Size(0, 20);
             label_33.TabIndex = 19;
             // 
             // label_34
@@ -278,7 +285,7 @@
             label_34.AutoSize = true;
             label_34.Location = new Point(255, 148);
             label_34.Name = "label_34";
-            label_34.Size = new Size(50, 40);
+            label_34.Size = new Size(0, 20);
             label_34.TabIndex = 20;
             // 
             // label_35
@@ -286,7 +293,7 @@
             label_35.AutoSize = true;
             label_35.Location = new Point(314, 148);
             label_35.Name = "label_35";
-            label_35.Size = new Size(50, 40);
+            label_35.Size = new Size(0, 20);
             label_35.TabIndex = 21;
             // 
             // label_41
@@ -294,7 +301,7 @@
             label_41.AutoSize = true;
             label_41.Location = new Point(78, 193);
             label_41.Name = "label_41";
-            label_41.Size = new Size(50, 40);
+            label_41.Size = new Size(0, 20);
             label_41.TabIndex = 23;
             // 
             // label_42
@@ -302,7 +309,7 @@
             label_42.AutoSize = true;
             label_42.Location = new Point(137, 193);
             label_42.Name = "label_42";
-            label_42.Size = new Size(50, 40);
+            label_42.Size = new Size(0, 20);
             label_42.TabIndex = 24;
             // 
             // label_43
@@ -310,7 +317,7 @@
             label_43.AutoSize = true;
             label_43.Location = new Point(196, 193);
             label_43.Name = "label_43";
-            label_43.Size = new Size(50, 40);
+            label_43.Size = new Size(0, 20);
             label_43.TabIndex = 25;
             // 
             // label_44
@@ -318,7 +325,7 @@
             label_44.AutoSize = true;
             label_44.Location = new Point(255, 193);
             label_44.Name = "label_44";
-            label_44.Size = new Size(50, 40);
+            label_44.Size = new Size(0, 20);
             label_44.TabIndex = 26;
             // 
             // label_45
@@ -326,7 +333,7 @@
             label_45.AutoSize = true;
             label_45.Location = new Point(314, 193);
             label_45.Name = "label_45";
-            label_45.Size = new Size(50, 40);
+            label_45.Size = new Size(0, 20);
             label_45.TabIndex = 27;
             // 
             // label_51
@@ -334,7 +341,7 @@
             label_51.AutoSize = true;
             label_51.Location = new Point(78, 238);
             label_51.Name = "label_51";
-            label_51.Size = new Size(50, 40);
+            label_51.Size = new Size(0, 20);
             label_51.TabIndex = 29;
             // 
             // label_52
@@ -342,7 +349,7 @@
             label_52.AutoSize = true;
             label_52.Location = new Point(137, 238);
             label_52.Name = "label_52";
-            label_52.Size = new Size(50, 40);
+            label_52.Size = new Size(0, 20);
             label_52.TabIndex = 30;
             // 
             // label_53
@@ -350,7 +357,7 @@
             label_53.AutoSize = true;
             label_53.Location = new Point(196, 238);
             label_53.Name = "label_53";
-            label_53.Size = new Size(50, 40);
+            label_53.Size = new Size(0, 20);
             label_53.TabIndex = 31;
             // 
             // label_54
@@ -358,7 +365,7 @@
             label_54.AutoSize = true;
             label_54.Location = new Point(255, 238);
             label_54.Name = "label_54";
-            label_54.Size = new Size(50, 40);
+            label_54.Size = new Size(0, 20);
             label_54.TabIndex = 32;
             // 
             // label_55
@@ -366,7 +373,7 @@
             label_55.AutoSize = true;
             label_55.Location = new Point(314, 238);
             label_55.Name = "label_55";
-            label_55.Size = new Size(50, 40);
+            label_55.Size = new Size(0, 20);
             label_55.TabIndex = 33;
             // 
             // labelS110
@@ -414,17 +421,74 @@
             labelS550.TabIndex = 38;
             labelS550.Text = "S5";
             // 
+            // labelTime
+            // 
+            labelTime.AutoSize = true;
+            labelTime.Location = new Point(12, 314);
+            labelTime.Name = "labelTime";
+            labelTime.Size = new Size(57, 20);
+            labelTime.TabIndex = 1;
+            labelTime.Text = "Время:";
+            // 
+            // labelStep
+            // 
+            labelStep.AutoSize = true;
+            labelStep.Location = new Point(12, 348);
+            labelStep.Name = "labelStep";
+            labelStep.Size = new Size(44, 20);
+            labelStep.TabIndex = 2;
+            labelStep.Text = "Шаг: ";
+            // 
+            // textBoxTime
+            // 
+            textBoxTime.Location = new Point(75, 311);
+            textBoxTime.Name = "textBoxTime";
+            textBoxTime.Size = new Size(125, 27);
+            textBoxTime.TabIndex = 3;
+            // 
+            // textBoxStep
+            // 
+            textBoxStep.Location = new Point(75, 348);
+            textBoxStep.Name = "textBoxStep";
+            textBoxStep.Size = new Size(125, 27);
+            textBoxStep.TabIndex = 4;
+            // 
+            // richTextBox
+            // 
+            richTextBox.Location = new Point(12, 381);
+            richTextBox.Name = "richTextBox";
+            richTextBox.ReadOnly = true;
+            richTextBox.Size = new Size(373, 460);
+            richTextBox.TabIndex = 5;
+            richTextBox.Text = "";
+            // 
+            // button
+            // 
+            button.Location = new Point(208, 310);
+            button.Name = "button";
+            button.Size = new Size(177, 28);
+            button.TabIndex = 7;
+            button.Text = "Рассчитать";
+            button.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(882, 853);
+            Controls.Add(button);
+            Controls.Add(richTextBox);
+            Controls.Add(textBoxStep);
+            Controls.Add(textBoxTime);
+            Controls.Add(labelStep);
+            Controls.Add(labelTime);
             Controls.Add(tableLayoutPanel);
             Name = "Form1";
             Text = "Form1";
             tableLayoutPanel.ResumeLayout(false);
             tableLayoutPanel.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -465,5 +529,12 @@
         private Label labelS330;
         private Label labelS440;
         private Label labelS550;
+        private Label labelTime;
+        private Label labelStep;
+        private TextBox textBoxTime;
+        private TextBox textBoxStep;
+        private RichTextBox richTextBox;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Button button;
     }
 }
