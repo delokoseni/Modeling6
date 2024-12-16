@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -108,7 +109,7 @@ namespace Modeling6
             double[] P = (double[])P0.Clone();
             solutions.Add((double[])P.Clone());
 
-            for (int step = 0; step < steps; step++)
+            for (int step = 0; step <= steps; step++) //!!!
             {
                 double[] dP = new double[N];
 
@@ -142,18 +143,19 @@ namespace Modeling6
         {
             using (StreamWriter writer = new StreamWriter(filename))
             {
-                writer.WriteLine("Time S1 S2 S3 S4 S5"); // Заголовок
+                writer.WriteLine("Time,S1,S2,S3,S4,S5"); // Заголовок
                 for (int i = 0; i < solutions.Count; i++)
                 {
                     writer.Write(i * dt);
                     foreach (var prob in solutions[i])
                     {
-                        writer.Write(" " + Math.Round(prob, 5).ToString().Replace(',', '.'));
+                        writer.Write("," + Math.Round(prob, 5).ToString(CultureInfo.InvariantCulture)); // Используйте CultureInfo для корректного формата
                     }
                     writer.WriteLine();
                 }
             }
         }
+
 
         private string MatrixToString(double[,] matrix, int decimalPlaces)
         {

@@ -83,7 +83,7 @@ namespace Modeling6
         private void buttonRun_Click(object sender, EventArgs e)
         {
             Markov markov = new Markov(this);
-            string result = markov.RunSimulation(3, 0.01);
+            string result = markov.RunSimulation(0.01, 3);
             richTextBox.AppendText(result + Environment.NewLine);
         }
 
