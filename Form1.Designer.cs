@@ -70,7 +70,7 @@
             textBoxStep = new TextBox();
             richTextBox = new RichTextBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            button = new Button();
+            buttonRun = new Button();
             tableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -462,21 +462,22 @@
             richTextBox.TabIndex = 5;
             richTextBox.Text = "";
             // 
-            // button
+            // buttonRun
             // 
-            button.Location = new Point(208, 310);
-            button.Name = "button";
-            button.Size = new Size(177, 28);
-            button.TabIndex = 7;
-            button.Text = "Рассчитать";
-            button.UseVisualStyleBackColor = true;
+            buttonRun.Location = new Point(208, 310);
+            buttonRun.Name = "buttonRun";
+            buttonRun.Size = new Size(177, 28);
+            buttonRun.TabIndex = 7;
+            buttonRun.Text = "Рассчитать";
+            buttonRun.UseVisualStyleBackColor = true;
+            buttonRun.Click += buttonRun_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(882, 853);
-            Controls.Add(button);
+            Controls.Add(buttonRun);
             Controls.Add(richTextBox);
             Controls.Add(textBoxStep);
             Controls.Add(textBoxTime);
@@ -535,6 +536,6 @@
         private TextBox textBoxStep;
         private RichTextBox richTextBox;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private Button button;
+        private Button buttonRun;
     }
 }

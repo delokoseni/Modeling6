@@ -7,7 +7,7 @@ namespace Modeling6
 {
     public partial class Form1 : Form
     {
-        private Label[,] labels; // Массив для хранения ссылок на Label
+        public Label[,] labels; // Массив для хранения ссылок на Label
 
         public Form1()
         {
@@ -79,5 +79,13 @@ namespace Modeling6
                 }
             }
         }
+
+        private void buttonRun_Click(object sender, EventArgs e)
+        {
+            Markov markov = new Markov(this);
+            string result = markov.RunSimulation(3, 0.01);
+            richTextBox.AppendText(result + Environment.NewLine);
+        }
+
     }
 }
