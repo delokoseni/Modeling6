@@ -1,3 +1,7 @@
+using OxyPlot.Axes;
+using OxyPlot.WindowsForms;
+using OxyPlot;
+using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +17,7 @@ namespace Modeling6
         {
             InitializeComponent();
             InitializeLabels();
+            SetupPlotView();
             FillLabels(LoadDataForTable());
         }
 
@@ -92,6 +97,12 @@ namespace Modeling6
                 Markov markov = new Markov(this);
                 string result = markov.RunSimulation(step, time);
                 richTextBox.AppendText(result + Environment.NewLine);
+                List<DataPoint> dataPoints = LoadDataFromCSV(); // Получение данных для графика по модели
+
+                if (dataPoints != null && dataPoints.Count > 0)
+                {
+                    LoadDataIntoPlot(dataPoints); // Загружаем данные на график
+                }
             }
             else
             {
@@ -100,6 +111,118 @@ namespace Modeling6
             }
         }
 
+        private void SetupPlotView()
+        {
+            // Создаем новую модель
+            plotView.Model = new PlotModel();
+
+            // Настраиваем оси
+            plotView.Model.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Bottom,
+                Title = "Время",
+                Minimum = 0,
+                Maximum = 5
+            });
+            plotView.Model.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                Title = "Вероятность",
+                Minimum = 0,
+                Maximum = 5
+            });
+
+        }
+
+        private void LoadDataIntoPlot(List<DataPoint> data)
+        {
+            try
+            {
+                // Пропускаем первую строку, если она содержит заголовки
+                if (data.Count > 0)
+                {
+                    plotView.Model.Series.Clear(); // Очищаем предыдущие серии
+
+                    // Добавляем линии для каждого S, используя OxyPlot.DataPoint
+                    plotView.Model.Series.Add(CreateLineSeries("S1", data.Skip(1).Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S1))));
+                    plotView.Model.Series.Add(CreateLineSeries("S2", data.Skip(1).Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S2))));
+                    plotView.Model.Series.Add(CreateLineSeries("S3", data.Skip(1).Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S3))));
+                    plotView.Model.Series.Add(CreateLineSeries("S4", data.Skip(1).Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S4))));
+                    plotView.Model.Series.Add(CreateLineSeries("S5", data.Skip(1).Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S5))));
+                    plotView.Invalidate(); // Обновляем график
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}"); // Вывод информации об ошибке в консоль
+            }
+        }
+
+        // Метод для создания серии данных для графика
+        private LineSeries CreateLineSeries(string title, IEnumerable<OxyPlot.DataPoint> points)
+        {
+            var series = new LineSeries
+            {
+                Title = title,
+                StrokeThickness = 2,
+                MarkerType = MarkerType.Circle
+            };
+
+            foreach (var point in points)
+            {
+                series.Points.Add(point);
+            }
+
+            return series;
+        }
+
+        private List<DataPoint> LoadDataFromCSV()
+        {
+            string[] lines = File.ReadAllLines("output.csv");
+            var data = new List<DataPoint>();
+
+            // Пропускаем строку заголовка
+            for (int i = 1; i < lines.Length; i++)
+            {
+                var values = lines[i].Split(',');
+                if (values.Length >= 6)
+                {
+                    double time = double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture); // Время
+                    double S1 = double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture);
+                    double S2 = double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture);
+                    double S3 = double.Parse(values[3], System.Globalization.CultureInfo.InvariantCulture);
+                    double S4 = double.Parse(values[4], System.Globalization.CultureInfo.InvariantCulture);
+                    double S5 = double.Parse(values[5], System.Globalization.CultureInfo.InvariantCulture);
+
+                    data.Add(new DataPoint(time, S1, S2,S3, S4, S5 ));
+                }
+            }
+
+            return data; // Возвращаем список загруженных данных
+        }
+
+
+        // Класс для хранения данных остается без изменений
+        public class DataPoint
+        {
+            public double Time { get; set; }
+            public double S1 { get; set; }
+            public double S2 { get; set; }
+            public double S3 { get; set; }
+            public double S4 { get; set; }
+            public double S5 { get; set; }
+
+            public DataPoint(double time, double s1, double s2, double s3, double s4, double s5)
+            {
+                Time = time;
+                S1 = s1;
+                S2 = s2;
+                S3 = s3;
+                S4 = s4;
+                S5 = s5;
+            }
+        }
 
     }
+
 }

@@ -71,7 +71,7 @@
             richTextBox = new RichTextBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             buttonRun = new Button();
-            plotView1 = new OxyPlot.WindowsForms.PlotView();
+            plotView = new OxyPlot.WindowsForms.PlotView();
             tableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -446,6 +446,7 @@
             textBoxTime.Name = "textBoxTime";
             textBoxTime.Size = new Size(125, 27);
             textBoxTime.TabIndex = 3;
+            textBoxTime.Text = "3";
             // 
             // textBoxStep
             // 
@@ -453,6 +454,7 @@
             textBoxStep.Name = "textBoxStep";
             textBoxStep.Size = new Size(125, 27);
             textBoxStep.TabIndex = 4;
+            textBoxStep.Text = "0,01";
             // 
             // richTextBox
             // 
@@ -473,24 +475,25 @@
             buttonRun.UseVisualStyleBackColor = true;
             buttonRun.Click += buttonRun_Click;
             // 
-            // plotView1
+            // plotView
             // 
-            plotView1.Location = new Point(391, 13);
-            plotView1.Name = "plotView1";
-            plotView1.PanCursor = Cursors.Hand;
-            plotView1.Size = new Size(479, 828);
-            plotView1.TabIndex = 8;
-            plotView1.Text = "plotView1";
-            plotView1.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView1.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView1.ZoomVerticalCursor = Cursors.SizeNS;
+            plotView.BackColor = SystemColors.Control;
+            plotView.Location = new Point(391, 13);
+            plotView.Name = "plotView";
+            plotView.PanCursor = Cursors.Hand;
+            plotView.Size = new Size(802, 828);
+            plotView.TabIndex = 8;
+            plotView.Text = "plotView1";
+            plotView.ZoomHorizontalCursor = Cursors.SizeWE;
+            plotView.ZoomRectangleCursor = Cursors.SizeNWSE;
+            plotView.ZoomVerticalCursor = Cursors.SizeNS;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(882, 853);
-            Controls.Add(plotView1);
+            ClientSize = new Size(1205, 853);
+            Controls.Add(plotView);
             Controls.Add(buttonRun);
             Controls.Add(richTextBox);
             Controls.Add(textBoxStep);
@@ -551,6 +554,6 @@
         private RichTextBox richTextBox;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button buttonRun;
-        private OxyPlot.WindowsForms.PlotView plotView1;
+        private OxyPlot.WindowsForms.PlotView plotView;
     }
 }
