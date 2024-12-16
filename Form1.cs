@@ -17,7 +17,6 @@ namespace Modeling6
         {
             InitializeComponent();
             InitializeLabels();
-            SetupPlotView();
             FillLabels(LoadDataForTable());
         }
 
@@ -97,12 +96,9 @@ namespace Modeling6
                 Markov markov = new Markov(this);
                 string result = markov.RunSimulation(step, time);
                 richTextBox.AppendText(result + Environment.NewLine);
+                SetupPlotView();
                 List<DataPoint> dataPoints = LoadDataFromCSV(); // Получение данных для графика по модели
-
-                if (dataPoints != null && dataPoints.Count > 0)
-                {
-                    LoadDataIntoPlot(dataPoints); // Загружаем данные на график
-                }
+                LoadDataIntoPlot(dataPoints); // Загружаем данные на график
             }
             else
             {
@@ -129,7 +125,7 @@ namespace Modeling6
                 Position = AxisPosition.Left,
                 Title = "Вероятность",
                 Minimum = 0,
-                Maximum = 5
+                Maximum = 1
             });
 
         }
@@ -138,17 +134,17 @@ namespace Modeling6
         {
             try
             {
-                // Пропускаем первую строку, если она содержит заголовки
+
                 if (data.Count > 0)
                 {
                     plotView.Model.Series.Clear(); // Очищаем предыдущие серии
 
                     // Добавляем линии для каждого S, используя OxyPlot.DataPoint
-                    plotView.Model.Series.Add(CreateLineSeries("S1", data.Skip(1).Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S1))));
-                    plotView.Model.Series.Add(CreateLineSeries("S2", data.Skip(1).Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S2))));
-                    plotView.Model.Series.Add(CreateLineSeries("S3", data.Skip(1).Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S3))));
-                    plotView.Model.Series.Add(CreateLineSeries("S4", data.Skip(1).Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S4))));
-                    plotView.Model.Series.Add(CreateLineSeries("S5", data.Skip(1).Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S5))));
+                    plotView.Model.Series.Add(CreateLineSeries("S1", data.Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S1))));
+                    plotView.Model.Series.Add(CreateLineSeries("S2", data.Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S2))));
+                    plotView.Model.Series.Add(CreateLineSeries("S3", data.Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S3))));
+                    plotView.Model.Series.Add(CreateLineSeries("S4", data.Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S4))));
+                    plotView.Model.Series.Add(CreateLineSeries("S5", data.Select(dp => new OxyPlot.DataPoint(dp.Time, dp.S5))));
                     plotView.Invalidate(); // Обновляем график
                 }
             }
@@ -184,7 +180,7 @@ namespace Modeling6
             // Пропускаем строку заголовка
             for (int i = 1; i < lines.Length; i++)
             {
-                var values = lines[i].Split(',');
+                var values = lines[i].Split(' ');
                 if (values.Length >= 6)
                 {
                     double time = double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture); // Время
@@ -194,7 +190,7 @@ namespace Modeling6
                     double S4 = double.Parse(values[4], System.Globalization.CultureInfo.InvariantCulture);
                     double S5 = double.Parse(values[5], System.Globalization.CultureInfo.InvariantCulture);
 
-                    data.Add(new DataPoint(time, S1, S2,S3, S4, S5 ));
+                    data.Add(new DataPoint(time, S1, S2, S3, S4, S5));
                 }
             }
 
@@ -222,7 +218,5 @@ namespace Modeling6
                 S5 = s5;
             }
         }
-
     }
-
 }
