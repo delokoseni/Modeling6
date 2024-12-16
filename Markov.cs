@@ -155,20 +155,23 @@ namespace Modeling6
             }
         }
 
-        private string MatrixToString(double[,] matrix)
+        private string MatrixToString(double[,] matrix, int decimalPlaces)
         {
             var rows = new List<string>();
+            string formatString = "F" + decimalPlaces; // Формат строки, например, "F1" для одного знака после запятой
+
             for (int i = 0; i < N; i++)
             {
                 var columns = new List<string>();
                 for (int j = 0; j < N; j++)
                 {
-                    columns.Add(Math.Round(matrix[i, j], 5).ToString("F5").Replace(',', '.')); // Формат с 5 знаками после запятой
+                    columns.Add(Math.Round(matrix[i, j], decimalPlaces).ToString(formatString).Replace(',', '.'));
                 }
                 rows.Add(string.Join("\t", columns));
             }
             return string.Join("\n", rows);
         }
+
 
         private void ModifyGraphForNonErgodicity()
         {
@@ -302,8 +305,8 @@ namespace Modeling6
             // Численное решение
             var solutions = EulerMethod(L, P0, dt, t_max);
 
-            string LMatrixString = "Матрица переходных интенсивностей L:\n" + MatrixToString(L);
-            string AMatrixString = "\nСистема Колмогорова (матрица A):\n" + MatrixToString(A);
+            string LMatrixString = "Матрица переходных интенсивностей L:\n" + MatrixToString(L, 1); // Изменено
+            string AMatrixString = "\nСистема Колмогорова (матрица A):\n" + MatrixToString(A, 1); // Изменено
 
             // Запись результатов в CSV файл
             WriteToCSV(solutions, dt, "output.csv");
@@ -335,14 +338,14 @@ namespace Modeling6
 
             // Формирование нового вывода
             results += "\nИзменяем граф для неэргодичности (удаляем связи из S1).\nНовый граф неэргодичен.\n";
-            results += "Новая матрица переходных интенсивностей L:\n" + MatrixToString(newL);
-            results += "\nНовая система Колмогорова (матрица A):\n" + MatrixToString(newA);
+            results += "Новая матрица переходных интенсивностей L:\n" + MatrixToString(newL, 1); // Изменено
+            results += "\nНовая система Колмогорова (матрица A):\n" + MatrixToString(newA, 1); // Изменено
 
             // Нахождение новых предельных вероятностей
             if (FindSteadyState(newA, out var newSteadyState))
             {
                 var newSteadyStateString = "\nНовые предельные вероятности:\n" +
-                                            string.Join("\n", newSteadyState.Select((p, index) => $"P{index + 1} = {p:F5}"));
+                                            string.Join("\n", newSteadyState.Select((p, index) => $"P{index + 1} = {Math.Abs(p):F5}")); // Изменено: добавлено Math.Abs
                 results += newSteadyStateString + "\n";
             }
             else
@@ -352,5 +355,6 @@ namespace Modeling6
 
             return results;
         }
+
     }
 }
