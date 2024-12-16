@@ -82,10 +82,24 @@ namespace Modeling6
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
-            Markov markov = new Markov(this);
-            string result = markov.RunSimulation(0.01, 3);
-            richTextBox.AppendText(result + Environment.NewLine);
+            // Получаем значения из полей ввода
+            double step;
+            double time;
+
+            // Проверяем, что вводимые значения являются числами
+            if (double.TryParse(textBoxStep.Text, out step) && double.TryParse(textBoxTime.Text, out time))
+            {
+                Markov markov = new Markov(this);
+                string result = markov.RunSimulation(step, time);
+                richTextBox.AppendText(result + Environment.NewLine);
+            }
+            else
+            {
+                // Если ввод некорректный, выводим сообщение об ошибке
+                MessageBox.Show("Пожалуйста, введите корректные числовые значения для шага и времени.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
     }
 }

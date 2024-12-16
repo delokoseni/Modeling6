@@ -71,6 +71,7 @@
             richTextBox = new RichTextBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             buttonRun = new Button();
+            plotView1 = new OxyPlot.WindowsForms.PlotView();
             tableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -472,11 +473,24 @@
             buttonRun.UseVisualStyleBackColor = true;
             buttonRun.Click += buttonRun_Click;
             // 
+            // plotView1
+            // 
+            plotView1.Location = new Point(391, 13);
+            plotView1.Name = "plotView1";
+            plotView1.PanCursor = Cursors.Hand;
+            plotView1.Size = new Size(479, 828);
+            plotView1.TabIndex = 8;
+            plotView1.Text = "plotView1";
+            plotView1.ZoomHorizontalCursor = Cursors.SizeWE;
+            plotView1.ZoomRectangleCursor = Cursors.SizeNWSE;
+            plotView1.ZoomVerticalCursor = Cursors.SizeNS;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(882, 853);
+            Controls.Add(plotView1);
             Controls.Add(buttonRun);
             Controls.Add(richTextBox);
             Controls.Add(textBoxStep);
@@ -537,5 +551,6 @@
         private RichTextBox richTextBox;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button buttonRun;
+        private OxyPlot.WindowsForms.PlotView plotView1;
     }
 }
